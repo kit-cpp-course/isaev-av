@@ -24,13 +24,14 @@ bool CatalogAudioToNewDir::createCoreDirectory()
 }
 
 const char * CatalogAudioToNewDir::createCalalogPath(std::string filePath)
-{
-	metadata = metadataGetter.getInfo(filePath);
+{	
+	metadataGetter = InfoFromAudioFactory::createObjInfoFromAudio();
+	metadata = metadataGetter->getInfo(filePath);
 
 	prepareBuffer();
 	buffer.bufferPath.append("\\" + buffer.bufferArtist);
 
-	int check = _mkdir(buffer.bufferPath.c_str()); // Попытка создания папки артиста
+	int check = _mkdir(buffer.bufferPath.c_str()); // Попытка создания папки артиста.
 	if (errno == ENOENT)
 	{
 		std::cout << "Problem creating " << buffer.bufferArtist << " directory! Path not found!\n";
@@ -70,7 +71,7 @@ void CatalogAudioToNewDir::prepareBuffer()
 
 	buffer.bufferPath = newDirPath;
 
-	buffer.bufferSingnature.append(metadata.signature); // Проверить, чтоб первые три знака были TAG
+	buffer.bufferSingnature.append(metadata.signature); // Проверить, чтоб первые три знака были TAG.
 	if (buffer.bufferSingnature.find("TAG") != 0)
 	{
 		buffer.bufferArtist = "Unknown Artists";

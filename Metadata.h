@@ -1,5 +1,6 @@
 #pragma once
 
+// —труктура, описывающа€ метаданные аудио файла в виде строго заданных массивов типа char.
 struct Metadata
 {
 	char signature[3];

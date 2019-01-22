@@ -3,6 +3,14 @@
 
 #include "InfoFromAudio.h"
 
+InfoFromAudioFactory * InfoFromAudioFactory::createObjInfoFromAudio()
+{
+	InfoFromAudioFactory * p;
+	p = new InfoFromAudio();
+
+	return p;
+}
+
 long InfoFromAudio::idv3FileOffset(FILE* audioFile)
 {
 	fseek(audioFile, 0L, SEEK_END);

@@ -9,18 +9,13 @@
 int main(int argc, char * argv[])
 {
 	Menu menu;
+	menu.getAllPaths(argc, argv);
 
 	try
 	{ 
-		if (argc > 1) menu.writeDownOldDirectory(argv[1]);
-		else menu.enterOldDirMessage();
-
 		AllAudioFilesList * fileList = new AllAudioFilesList(menu.getOldDiretory());
 		std::vector<std::string> audioFilesList = fileList->getAllMp3FileList();
 		delete fileList;
-
-		if (argc > 2) menu.writeDownNewDirectory(argv[2]);
-		else menu.enterNewDirMessage();
 
 		CatalogAudioToNewDir * catalogFiles = new CatalogAudioToNewDir(menu.getNewDiretory(), audioFilesList);
 		catalogFiles->MoveAndCatalogFiles();
