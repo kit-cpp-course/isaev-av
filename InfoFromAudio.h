@@ -11,9 +11,6 @@ class InfoFromAudioFactory
 {
 public:
 
-	// Деструктор.
-	virtual ~InfoFromAudioFactory() {}
-
 	// Возращает метаданные аудио файла в виде описывающего их объекта структуры Metadata.
 	virtual Metadata getInfo(std::string strFileName) {}
 
@@ -25,10 +22,10 @@ public:
 class InfoFromAudio : public InfoFromAudioFactory
 {
 	// Указатель на файловый объект.
-	FILE * audioFl;
+	FILE * audioFl = NULL;
 
 	// Указатель на адрес памяти, содержащей метаданные аудио файла.
-	Metadata * audioFileObj;
+	Metadata * audioFileObj = NULL;
 
 	// Буфер для хранения метаданных в их первичном виде. 
 	char * buffer;
@@ -38,11 +35,9 @@ class InfoFromAudio : public InfoFromAudioFactory
 	long idv3FileOffset(FILE * audioFile);
 
 public:
-	// Конструктор.
-	InfoFromAudio() { audioFl = NULL; audioFileObj = NULL; }
 
 	// Деструктор.
-	~InfoFromAudio() { delete audioFl; delete audioFileObj; }
+	~InfoFromAudio();
 
 	// Возращает метаданные аудио файла в виде описывающего их объекта структуры Metadata.
 	Metadata getInfo(std::string strFileName);

@@ -41,3 +41,9 @@ Metadata InfoFromAudio::getInfo(std::string strFileName)
 
 	return *audioFileObj;
 }
+
+InfoFromAudio::~InfoFromAudio()
+{
+	delete audioFl;
+	delete audioFileObj;
+}

@@ -13,12 +13,11 @@ int main(int argc, char * argv[])
 
 	try
 	{ 
-		AllAudioFilesList * fileList = new AllAudioFilesList(menu.getOldDiretory());
-		std::vector<std::string> audioFilesList = fileList->getAllMp3FileList();
-		delete fileList;
+		AllAudioFilesList fileList(menu.getOldDiretory());
+		std::vector<std::string> audioFilesList = fileList.getAllMp3FileList();
 
-		CatalogAudioToNewDir * catalogFiles = new CatalogAudioToNewDir(menu.getNewDiretory(), audioFilesList);
-		catalogFiles->MoveAndCatalogFiles();
+		CatalogAudioToNewDir catalogFiles(menu.getNewDiretory(), audioFilesList);
+		catalogFiles.MoveAndCatalogFiles();
 	}
 	catch (const std::exception& e)
 	{
